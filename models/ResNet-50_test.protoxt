@@ -1,41 +1,17 @@
 layer {
   name: "data"
-  type: "ImageData"
+  type: "Python"
   top: "data"
   top: "label"
-  include {
-    phase: TRAIN
+  python_param {
+    module: 'reid_layer.data_layer'
+    layer: 'DataLayer'
+    param_str: "{'batch_size':300,     'mean': (104.007,  116.669,  122.679),     'root_folder': 'DATASET_ROOT_DIR',     'source': 'DATASET_TXT_FILENAME',     'mirror': True, 'pad': 0,   'shape': (160, 80)}"
   }
-  transform_param {
-    mirror: true
-    crop_size: 224
-  }
-  image_data_param {
-    source: "/home/atlas2_ssd/simon/ilsvrc12/train.txt"
-    batch_size: 1
-    shuffle: true
-    root_folder: "/home/atlas1_ssd/simon/ilsvrc12-scaled/train/"
-  }
+  include: { phase: TRAIN }
 }
-layer {
-  name: "data"
-  type: "ImageData"
-  top: "data"
-  top: "label"
-  include {
-    phase: TEST
-  }
-  transform_param {
-    mirror: false
-    crop_size: 224
-  }
-  image_data_param {
-    source: "/home/atlas2_ssd/simon/ilsvrc12/val.txt"
-    batch_size: 10
-    shuffle: true
-    root_folder: "/home/atlas1_ssd/simon/ilsvrc12-scaled/val/"
-  }
-}
+
+####################ResNet-50############################
 layer {
   name: "data_bn"
   type: "BatchNorm"
