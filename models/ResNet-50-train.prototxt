@@ -15,7 +15,6 @@ layer {
 
 
 #######################BVLC_RES-50_NET##################################
-name: "ResNet-50"
 layer {
   name: "data"
   type: "Data"
