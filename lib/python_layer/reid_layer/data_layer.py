@@ -99,19 +99,15 @@ class BatchLoader(Thread):
             list_file.close( )
         lines = content.split('\n')
         all_id_dict={}
-        all_id_dict_temp={}
         for line in lines:
             if len(line.split())<2:
                 continue
             file_name=line.split()[0]
             label_id=line.split()[1]
             if all_id_dict_temp.has_key(label_id):
-                all_id_dict[all_id_dict_temp[label_id]].append(file_name)
+                all_id_dict[label_id].append(file_name)
             else:
-                all_id_dict_temp[label_id]= len(all_id_dict.keys())
-                all_id_dict[all_id_dict_temp[label_id]]=[file_name]
-        print len(all_id_dict.keys())
-        print len(all_id_dict_temp.keys())
+                all_id_dict[label_id]=[file_name]
         return all_id_dict
 
     def get_batch_list(self):
