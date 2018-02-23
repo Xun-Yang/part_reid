@@ -104,7 +104,7 @@ class BatchLoader(Thread):
                 continue
             file_name=line.split()[0]
             label_id=line.split()[1]
-            if all_id_dict_temp.has_key(label_id):
+            if all_id_dict.has_key(label_id):
                 all_id_dict[label_id].append(file_name)
             else:
                 all_id_dict[label_id]=[file_name]
